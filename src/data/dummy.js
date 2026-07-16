@@ -1,5 +1,5 @@
 export const dummyData = {
-    resumeType: "",
+    resumeType: "Experienced",
     personalInfo: {
         name: "Roald Dahl",
         summary: "Aspiring mern stack devloper proficient in React, node and express.",

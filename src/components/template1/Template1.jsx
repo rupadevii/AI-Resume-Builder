@@ -6,11 +6,10 @@ import Projects from './Projects'
 import Heading from './Heading'
 
 export default function Template1({data}) {
-
     return (
         <>
             <PersonalInfo data={data}/>
-            {data.personalInfo.summary && (
+            {data.personalInfo?.summary && (
                 <Heading label={"PROFILE"}/>
             )}
             <div>
@@ -18,19 +17,19 @@ export default function Template1({data}) {
                     {data.personalInfo.summary}
                 </h3>
             </div>
-            {data.workExperience[0].designation && (
+            {data.workExperience && data.workExperience[0]?.designation && (
                 <div>
                     <Heading label={"PROFESSIONAL EXPERIENCE"}/>
                     <Experience data={data}/>
                 </div>
             )}
-            {data.projects[0].title && (
+            {data.projects[0]?.title && (
                 <div>
                     <Heading label={"PROJECTS"}/>
                     <Projects data={data}/>
                 </div>
             )}
-            {data.education[0].school && (
+            {data.education[0]?.school && (
                 <div>
                     <Heading label={"EDUCATION"}/>
                     <Education data={data}/>
