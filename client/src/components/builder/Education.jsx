@@ -20,7 +20,7 @@ export default function Education() {
             degree: "",
             startDate: "",
             endDate: "",
-            cgpa: 0,
+            cgpa: "",
         }]}))
     }
 

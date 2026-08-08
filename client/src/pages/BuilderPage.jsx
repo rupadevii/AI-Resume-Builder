@@ -26,8 +26,8 @@ export default function BuilderPage() {
     }, [info])
 
     return (
-        <main className='flex pt-24 pb-10'>
-            <section className='form-section px-12 w-178 max-h-screen overflow-y-auto'>
+        <main className='flex pt-24 flex-col md:flex-row'>
+            <section className='form-section px-12 w-178 max-h-screen overflow-y-auto pb-10'>
                 <StatsScore score={score}/>
                 <PersonalInfo/>
                 <Education/>
@@ -37,7 +37,7 @@ export default function BuilderPage() {
                 <Projects/>
                 <Skills/>
             </section>
-            <section className='resume-section max-h-screen overflow-y-auto'>
+            <section className='resume-section max-h-screen overflow-y-auto pb-10'>
                 <Preview template={template}/>
             </section>
         </main>
