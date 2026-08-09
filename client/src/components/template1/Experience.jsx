@@ -4,7 +4,7 @@ export default function Experience({data}) {
 
     return (
         <>
-            {data.workExperience.map((item, index) => (
+            {data.workExperience?.map((item, index) => (
                 <div className='mb-2' key={index}>
                     <div className='flex justify-between'>
                         <div className='w-380'>

@@ -3,7 +3,7 @@ import { formatDate } from '../../utils/date.util'
 export default function Education({data}) {
     return (
         <>
-            {data.education.map((item, index) => (
+            {data.education?.map((item, index) => (
                 <div key={index}>
                     <div className='flex justify-between'>
                         <div>

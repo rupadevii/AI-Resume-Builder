@@ -4,9 +4,9 @@ export default function PersonalInfo({data}) {
     return (
         <div>
             <div className='header flex flex-col items-center'>
-                <h1>{data.personalInfo.name}</h1>
+                <h1>{data.personalInfo?.name}</h1>
                 <div className='container-row'>
-                    {data.personalInfo.location && (
+                    {data.personalInfo?.location && (
                         <div className='container'>
                             <MapPin size={14}/>
                             <h2>
@@ -14,7 +14,7 @@ export default function PersonalInfo({data}) {
                             </h2>
                         </div>
                     )}
-                    {data.personalInfo.email && (
+                    {data.personalInfo?.email && (
                         <div className='container'>
                             <Mail size={14}/>
                             <h2>
@@ -22,7 +22,7 @@ export default function PersonalInfo({data}) {
                             </h2>
                         </div>
                     )}
-                    {data.personalInfo.phone && (
+                    {data.personalInfo?.phone && (
                         <div className='container'>
                             <Phone size={14}/>
                             <h2>
@@ -30,7 +30,7 @@ export default function PersonalInfo({data}) {
                             </h2>
                         </div>
                     )}
-                    {data.personalInfo.githubURL && (
+                    {data.personalInfo?.githubURL && (
                         <a href={data.personalInfo.githubURL}>
                             <div className='container'>
                                 <Github size={14}/>
@@ -40,7 +40,7 @@ export default function PersonalInfo({data}) {
                             </div>
                         </a>
                     )}
-                    {data.personalInfo.linkedInURL && (
+                    {data.personalInfo?.linkedInURL && (
                         <a href={data.personalInfo.linkedInURL}>
                             <div className='container'>
                                 <Linkedin size={14}/>

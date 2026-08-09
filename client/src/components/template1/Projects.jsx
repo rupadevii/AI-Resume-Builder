@@ -3,7 +3,7 @@ import { Github, Link } from 'lucide-react'
 export default function Projects({data}) {
     return (
         <>
-            {data.projects.map((item, index) => (
+            {data.projects?.map((item, index) => (
                 <div key={index}>
                     <div className='flex justify-between items-start'>
                         <div>

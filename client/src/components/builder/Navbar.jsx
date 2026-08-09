@@ -5,7 +5,7 @@ import { useInfo } from "../../context/InfoContext";
 export default function Navbar() {
     const location = useLocation()
     const {setInfo, clearMockData} = useInfo()
-    if(location.pathname==="/" || location.pathname==="/home") return null;
+    if(location.pathname==="/" || location.pathname==="/home" || location.pathname==="/signup" || location.pathname==="/login") return null;
 
     function handleClick(){
         setInfo(dummyData)

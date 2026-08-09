@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import BuilderPage from './pages/BuilderPage'
 import Navbar from './components/builder/Navbar'
 import Modal from 'react-modal';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 Modal.setAppElement('#root');
 
@@ -15,6 +17,8 @@ export default function App() {
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="/home" element={<HomePage/>}/>
                 <Route path="/build/:template" element={<BuilderPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
             </Routes>
         </>
     )

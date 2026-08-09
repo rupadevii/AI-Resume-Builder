@@ -23,8 +23,8 @@ export default function HomePage(){
                 <div>
                     <h2 className='text-4xl font-extrabold'>Choose Resume Type</h2>
                     <div className='flex gap-4 my-6'>
-                        <Button handleClick={handleClick} label="Beginner" isActive={info.resumeType === "Beginner"}/>
-                        <Button handleClick={handleClick} label="Experienced" isActive={info.resumeType === "Experienced"}/>
+                        <button className={`flex my-2 rounded-2xl py-8 px-14 capitalize shadow-lg cursor-pointer gap-3 items-center hover:bg-stone-300 text-xl ${info.resumeType === "Beginner" ? "border" : ""}`} onClick={() => handleClick("Beginner")}>Beginner</button>
+                        <button className={`flex my-2 rounded-2xl py-8 px-14 capitalize shadow-lg cursor-pointer gap-3 items-center hover:bg-stone-300 text-xl ${info.resumeType === "Experienced" ? "border" : ""}`} onClick={() => handleClick("Experienced")}>Experienced</button>
                     </div>
                 </div>
                 <div>

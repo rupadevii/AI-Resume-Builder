@@ -2,6 +2,7 @@
 
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: 'Gilroy-Regular', sans-serif; */
     /* background-color: rgb(246, 246, 246); */
     /* background-image: linear-gradient(to right, rgb(237, 236, 236), rgb(216, 210, 210), rgb(216, 210, 210)); */
     background-color: rgb(237, 236, 236);
@@ -111,6 +112,11 @@ input, textarea{
 
 ::-webkit-scrollbar{
     display: none;
+}
+
+.auth-left{
+    background-image: linear-gradient(rgb(237,236,236) 1px, transparent 1px), linear-gradient(90deg, rgb(237,236,236) 1px, transparent 1px);
+    background-size: 32px 32px;
 }
 
 
