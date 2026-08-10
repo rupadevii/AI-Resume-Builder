@@ -3,7 +3,9 @@ import dotenv from 'dotenv'
 import { connectDB } from './config/mongoose.config.js';
 import cors from 'cors'
 import authRoutes from './routes/auth.routes.js'
+import resumeRoutes from './routes/resume.routes.js'
 import cookieParser from "cookie-parser"
+import { authMiddleware } from './middleware/auth.middleware.js';
 
 dotenv.config({quiet: true})
 
@@ -19,6 +21,7 @@ app.use(cookieParser())
 
 app.use(express.json())
 app.use("/auth", authRoutes)
+app.use("/resumes", authMiddleware, resumeRoutes)
 
 app.get("/health", (req, res) => {
     res.json({msg: "Hello from server"})
