@@ -34,14 +34,22 @@ export default function Preview({template}) {
         <div>
             <div className='mb-3 flex justify-between'>
                 <div className='flex gap-1'>
-                    <div onClick={() => setIsShowing(false)} className={`${!isShowing && "bg-black text-white"} px-4 py-2 rounded-md cursor-pointer hover:bg-black hover:text-white`}>Preview</div>
-                    <div onClick={() => setIsShowing(true)} className={`${isShowing && "bg-black text-white"} px-3 py-2 rounded-md cursor-pointer hover:bg-black hover:text-white`}>AI</div>
+                    <div onClick={() => setIsShowing(false)} className={`${!isShowing && "bg-black text-white"} px-4 py-1 rounded-md cursor-pointer hover:bg-black hover:text-white`}>Preview</div>
+                    <div onClick={() => setIsShowing(true)} className={`${isShowing && "bg-black text-white"} px-3 py-1 rounded-md cursor-pointer hover:bg-black hover:text-white`}>AI</div>
                 </div>
                 <div className='flex gap-5 items-center'>
                     {show && (
-                        <button className="hover:underline underline-offset-2" onClick={openModal}>Compare</button>
+                        <button 
+                            className="hover:underline underline-offset-2" 
+                            onClick={openModal}>
+                                Compare
+                        </button>
                     )}
-                    <button onClick={handlePrint} className='border-2 border-black px-3 py-2 text-white rounded-md mr-5 hover:bg-red-700 bg-red-800'>Export PDF</button>
+                    <button 
+                        onClick={handlePrint} 
+                        className='border-2 border-black px-3 py-1 text-white rounded-md mr-5 hover:bg-red-700 bg-red-800'>
+                            Export PDF
+                    </button>
                 </div>
             </div>
             <div ref={ref}>

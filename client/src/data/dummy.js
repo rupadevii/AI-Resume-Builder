@@ -2,7 +2,7 @@ export const dummyData = {
     resumeType: "Experienced",
     personalInfo: {
         name: "Roald Dahl",
-        summary: "Aspiring mern stack devloper proficient in React, node and express.",
+        summary: "Aspiring mern stack developer proficient in React, node and express.",
         githubURL: "https://github.com/rupadevii",
         linkedInURL: "https://linkedin.com/abcd",
         email: "prarthnaawasthi@gmail.com",

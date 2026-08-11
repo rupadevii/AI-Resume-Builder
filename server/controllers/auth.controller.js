@@ -78,6 +78,22 @@ export const login = async (req, res) => {
     }
 }
 
+export const logout = async (req, res) => {
+    try{
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
+        
+        res.status(200).json({msg: "Logged out successfully."})
+    }
+    catch(error){
+        console.error(error.message);
+        res.status(500).json({msg: error.message})
+    }
+}
+
 export const getMe = async(req, res) => {
     const user = await User.findById(req.user.id)
 

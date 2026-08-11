@@ -5,6 +5,8 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import Alert from '../components/ui/Alert';
 import { isValidEmail } from '../utils/validation';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../redux/features/authSlice';
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ function SignupPage() {
         password: '',
     });
     const [formError, setFormError] = useState('');
+    const dispatch = useDispatch()
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -44,6 +47,7 @@ function SignupPage() {
         setError('');
         try {
             await api.post('/auth/register', formData);
+            dispatch(fetchUser())
             navigate('/home');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');

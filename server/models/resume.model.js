@@ -18,7 +18,7 @@ export const resumeSchema = mongoose.Schema({
         type: String,
         default: 'template1'
     }
-})
+}, {timestamps: true})
 
 const Resume = mongoose.model("Resume", resumeSchema)
 

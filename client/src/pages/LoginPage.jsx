@@ -5,6 +5,8 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import Alert from '../components/ui/Alert';
 import { isValidEmail } from '../utils/validation';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../redux/features/authSlice';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ function LoginPage() {
         password: '',
     });
     const [formError, setFormError] = useState('');
+    const dispatch = useDispatch()
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -44,6 +47,7 @@ function LoginPage() {
 
         try {
             await api.post('/auth/login', formData);
+            dispatch(fetchUser())
             navigate('/home');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
@@ -90,7 +94,7 @@ function LoginPage() {
                 <div className="w-full max-w-md border p-9 rounded-lg">
                     <div className="mb-6">
                         <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">
-                            Welcome Back
+                            Login
                         </h1>
                         <p className="text-md text-neutral-500 mt-1.5">
                             Sign in to continue with Resume Builder

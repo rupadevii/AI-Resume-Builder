@@ -6,10 +6,19 @@ import Navbar from './components/builder/Navbar'
 import Modal from 'react-modal';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import { useEffect } from 'react';
+import { fetchUser } from './redux/features/authSlice';
+import { useDispatch } from 'react-redux';
 
 Modal.setAppElement('#root');
 
 export default function App() {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchUser())
+    })
+
     return (
         <>
             <Navbar/>
