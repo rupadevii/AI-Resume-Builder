@@ -9,6 +9,7 @@ import SignupPage from './pages/SignupPage';
 import { useEffect } from 'react';
 import { fetchUser } from './redux/features/authSlice';
 import { useDispatch } from 'react-redux';
+import ResumesPage from './pages/ResumesPage';
 
 Modal.setAppElement('#root');
 
@@ -25,9 +26,10 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="/home" element={<HomePage/>}/>
-                <Route path="/build/:template" element={<BuilderPage/>}/>
+                <Route path="/build" element={<BuilderPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/signup" element={<SignupPage/>}/>
+                <Route path="/resumes" element={<ResumesPage/>}/>
             </Routes>
         </>
     )

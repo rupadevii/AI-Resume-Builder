@@ -19,7 +19,7 @@ export default function Navbar() {
 
     async function logoutUser(){
         try{
-            await api.post('/auth/logout')
+            await api.post('/auth/logout', {})
             dispatch(fetchUser())
         }catch(error){
             console.log(error)
@@ -35,6 +35,9 @@ export default function Navbar() {
                 {
                     isAuthenticated ? (
                         <ul className="list-style-none flex items-center gap-4">
+                            <li className='rounded-sm px-3 py-1 gap-2 hover:bg-red-700 flex items-center hover:cursor-pointer border-white border'>
+                                <Link to="/resumes"><span className='mb-0'>My Resumes</span></Link>
+                            </li>
                             <li className='hover:underline underline-offset-2 hover:cursor-pointer' onClick={logoutUser}>Logout</li>
                         </ul>
                     ) : (

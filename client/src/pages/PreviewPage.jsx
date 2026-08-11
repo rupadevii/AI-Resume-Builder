@@ -1,25 +1,23 @@
-import { useInfo } from '../context/InfoContext'
 import Template1 from '../components/template1/Template1'
 import Template2 from '../components/template2/Template2'
 import Template3 from '../components/template3/Template3'
 import Diff from '../components/preview/Diff'
 import DiffedPreview from '../components/preview/DiffedPreview'
 
-export default function PreviewPage({template, aiResponse}) {
-    const {info} = useInfo()
+export default function PreviewPage({template, aiResponse, originalInfo}) {
 
     return (
         <section className='preview-container px-8'>
             <div className='flex gap-6'>
                 <div className='w-[50%] p-4'>
                     {template==="template1" && (
-                        <Template1 data={info}/>
+                        <Template1 data={originalInfo}/>
                     )}
                     {template==="template2" && (
-                        <Template2 data={info}/>
+                        <Template2 data={originalInfo}/>
                     )}
                     {template==="template3" && (
-                        <Template3 data={info}/>
+                        <Template3 data={originalInfo}/>
                     )}
                 </div>
 
@@ -37,7 +35,7 @@ export default function PreviewPage({template, aiResponse}) {
                         {template==="template3" && (
                             <Template3 data={aiResponse}/>
                         )} */}
-                        <DiffedPreview info={info} aiResponse={aiResponse} template={template}/>
+                        <DiffedPreview info={originalInfo} aiResponse={aiResponse} template={template}/>
                     </div> 
                     )}
                 </div>

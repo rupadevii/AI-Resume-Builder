@@ -11,7 +11,7 @@ export default function PersonalInfo() {
         const {name, value} = e.target
 
         if(name === "summary"){
-            if(value.length > 200) return
+            if(value.length > 400) return
         }
 
         setInfo(prev => ({...prev, personalInfo: {
@@ -24,17 +24,15 @@ export default function PersonalInfo() {
         }
 
         if(name === "githubURL"){
-            // if(!value.includes('https://github.com/')) error = "Enter valid github link"
             if(!value.includes('github.com/')) error = "Enter valid github link"
         }
 
         if(name === "linkedInURL"){
-            // if(!value.includes('https://linkedin.com/')) error = "Enter valid linkedIn link"
             if(!value.includes('linkedin.com/')) error = "Enter valid linkedIn link"
         }
 
         if(name === "summary"){
-            if(value.length > 200) return
+            if(value.length > 400) return
         }
 
         setErrors(prev => ({...prev, [name]: error}))
@@ -121,7 +119,7 @@ export default function PersonalInfo() {
                 <div className='flex flex-col my-2'>
                     <div className='flex justify-between'>
                         <label htmlFor="summary" className="text-stone-500 text-xs my-1">PROFESSIONAL SUMMARY</label>
-                        <span className={`text-sm ${info.personalInfo.summary.length <180 ? "text-yellow-600" : "text-red-500"}`}>{info.personalInfo.summary.length}/200</span>
+                        <span className={`text-sm ${info.personalInfo.summary.length <380 ? "text-yellow-600" : "text-red-500"}`}>{info.personalInfo.summary.length}/400</span>
                     </div>
                     <textarea 
                         rows="3" className='border rounded-md p-3 '

@@ -14,7 +14,7 @@ export default function HomePage(){
     }
     
     function chooseTemplate(type){
-        navigate(`/build/${type}`)
+        navigate(`/build?template=${type}`)
     }
 
     return (

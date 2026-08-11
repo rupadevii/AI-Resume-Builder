@@ -8,12 +8,15 @@ import Preview from '../components/preview/Preview'
 import { useInfo } from '../context/InfoContext'
 import { useEffect, useState } from 'react'
 import { calculateCount, calculateTotalCount } from '../utils/stats'
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import api from '../services/api';
 
 export default function BuilderPage() {
     const [score, setScore] = useState(0)
-    const {info} = useInfo()
-    const {template} = useParams()
+    const {info, setInfo} = useInfo()
+    const [searchParams] = useSearchParams()
+    const template = searchParams.get('template')
+    const [resumeId, setResumeId] = useState(searchParams.get('id') || null)
 
     useEffect(() => {
         const totalCount = calculateTotalCount(info)
@@ -25,20 +28,32 @@ export default function BuilderPage() {
         
     }, [info])
 
+    useEffect(() => {
+        async function fetchInfo(){
+            const res = await api.get(`/resumes/${resumeId}`)
+            console.log("res",res)
+            setInfo(res.data.resume.data)
+        }
+
+        if(resumeId){
+            fetchInfo()
+        }
+    }, [resumeId])
+
     return (
         <main className='flex pt-24 flex-col md:flex-row'>
             <section className='form-section px-12 w-178 max-h-screen overflow-y-auto pb-10'>
                 <StatsScore score={score}/>
                 <PersonalInfo/>
                 <Education/>
-                {info.resumeType === "Experienced" && (
+                {info.resumeType !== "Beginner" && (
                     <Experience/>
                 )}
                 <Projects/>
                 <Skills/>
             </section>
             <section className='resume-section max-h-screen overflow-y-auto pb-10'>
-                <Preview template={template}/>
+                <Preview template={template} resumeId={resumeId} setResumeId={setResumeId}/>
             </section>
         </main>
     )

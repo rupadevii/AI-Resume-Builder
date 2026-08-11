@@ -8,9 +8,11 @@ import Template3 from '../template3/Template3'
 import Template2 from '../template2/Template2'
 import Modal from 'react-modal'
 import { customStyles } from '../../utils/styles'
+import { useSelector } from 'react-redux';
+import api from '../../services/api';
 
-export default function Preview({template}) {
-    const {info} = useInfo()
+export default function Preview({template, resumeId, setResumeId}) {
+    const {info, setInfo} = useInfo()
     const [isShowing, setIsShowing] = useState(false)
     const [aiResponse, setAiResponse] = useState({})
     const [show, setShow] = useState(false)
@@ -21,6 +23,9 @@ export default function Preview({template}) {
     })
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const {isAuthenticated} = useSelector(state => state.auth)
+    const [saving, setSaving] = useState(false)
+    const [originalInfo, setOriginalInfo] = useState({})
 
     function openModal() {
         setIsOpen(true);
@@ -28,6 +33,23 @@ export default function Preview({template}) {
 
     function closeModal() {
         setIsOpen(false);
+    }
+
+    async function saveResume(){
+        try {
+            setSaving(true)
+            if(!resumeId){
+                const res = await api.post('/resumes', {data: info, template})
+                setResumeId(res.data.resume._id)
+            }
+            else{
+                await api.patch(`/resumes/${resumeId}`, {data:info, template})
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setSaving(false)
+        }
     }
     
     return (
@@ -39,12 +61,25 @@ export default function Preview({template}) {
                 </div>
                 <div className='flex gap-5 items-center'>
                     {show && (
+                        <>
                         <button 
                             className="hover:underline underline-offset-2" 
                             onClick={openModal}>
                                 Compare
                         </button>
+                        <button
+                            className=""
+                            onClick={() => setInfo(aiResponse)}
+                        >Use this</button>
+                        </>
                     )}
+                    <button 
+                        disabled={!isAuthenticated} 
+                        className='border px-3 py-1 rounded-md disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed save-btn hover:bg-gray-200'
+                        onClick={saveResume}
+                    >
+                        {saving ? "Saving..." : "Save"}
+                    </button>
                     <button 
                         onClick={handlePrint} 
                         className='border-2 border-black px-3 py-1 text-white rounded-md mr-5 hover:bg-red-700 bg-red-800'>
@@ -72,7 +107,9 @@ export default function Preview({template}) {
                         show={show} 
                         setShow={setShow} 
                         aiResponse={aiResponse} 
-                        setAiResponse={setAiResponse}/>
+                        setAiResponse={setAiResponse}
+                        setOriginalInfo={setOriginalInfo}
+                        />
                 </Activity>
 
                 <Modal
@@ -80,7 +117,7 @@ export default function Preview({template}) {
                     onRequestClose={closeModal}
                     style={customStyles}
                 >
-                    <PreviewPage aiResponse={aiResponse} template={template}/>
+                    <PreviewPage aiResponse={aiResponse} template={template} originalInfo={originalInfo}/>
                 </Modal>
             </div>
         </div>

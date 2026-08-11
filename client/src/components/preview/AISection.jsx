@@ -8,7 +8,7 @@ import { calculateCount, calculateTotalCount } from '../../utils/stats'
 import { Sparkle, Sparkles } from 'lucide-react'
 const URL = import.meta.env.VITE_BASE_URL
 
-export default function AISection({template, setShow, show, aiResponse, setAiResponse}) {
+export default function AISection({template, setShow, show, aiResponse, setAiResponse, setOriginalInfo}) {
     const [loading, setLoading] = useState(false)
     const {info} = useInfo()
     const [error, setError] = useState(null)
@@ -30,6 +30,7 @@ export default function AISection({template, setShow, show, aiResponse, setAiRes
                 return
             }
 
+            setOriginalInfo(structuredClone(info))
             const res = await axios.post(`/api/refine-resume`, {resumeData:info})
             setAiResponse(res.data.data)
             localStorage.setItem("ai_response", JSON.stringify(res.data.data))

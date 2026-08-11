@@ -8,7 +8,7 @@ export default function Experience() {
         const {name, value} = e.target
         
         if(name === "desc"){
-            if(value.length > 200) return
+            if(value.length > 300) return
         }
         
         if(name==="isCurrentCompany"){
@@ -97,7 +97,7 @@ export default function Experience() {
                     <div className='flex flex-col my-2'>
                         <div className='flex justify-between'>
                             <label htmlFor="desc" className="text-stone-500 text-xs my-1">DESCRIPTION</label>
-                            <span className={`text-sm ${info.workExperience[index].desc.length <180 ? "text-yellow-600" : "text-red-500"}`}>{info.workExperience[index].desc.length}/200</span>
+                            <span className={`text-sm ${info.workExperience[index].desc.length <280 ? "text-yellow-600" : "text-red-500"}`}>{info.workExperience[index].desc.length}/300</span>
                         </div>
                         <textarea 
                             rows="3" className='border rounded-md p-3'
