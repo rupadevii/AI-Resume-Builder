@@ -1,22 +1,24 @@
 export default function Skills({data}) {
-
     return (
-        <ul>
-            {data.skills?.technical?.length>0 && (
-                <li><b>Technical Skills: </b>
+        <div className="space-y-1">
+            {data.skills?.technical?.length > 0 && (
+                <p className="text-[14px] leading-[1.3]">
+                    <span className="font-bold">Technical Skills: </span>
                     {data.skills.technical.join(", ")}
-                </li>
+                </p>
             )}
-            {data.skills?.soft?.length>0 && (
-                <li><b>Soft Skills: </b>
+            {data.skills?.soft?.length > 0 && (
+                <p className="text-[14px] leading-[1.3]">
+                    <span className="font-bold">Soft Skills: </span>
                     {data.skills.soft.join(", ")}
-                </li>
+                </p>
             )}
-            {data.skills?.tools?.length>0 && (
-                <li><b>Tools : </b>
+            {data.skills?.tools?.length > 0 && (
+                <p className="text-[14px] leading-[1.3]">
+                    <span className="font-bold">Tools: </span>
                     {data.skills.tools.join(", ")}
-                </li>
+                </p>
             )}
-        </ul>
+        </div>
     )
 }

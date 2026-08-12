@@ -27,71 +27,26 @@ input, textarea{
     width: 210mm;
     min-height: 297mm;
     margin: auto;
-    padding: 10mm 18mm;
+    padding: 10mm 16mm;
     background: white;
     box-sizing: border-box;
     border: 1px solid black
 }
 
-.resume p{
-    line-height: 22px;
+.resume-card{
+    width: 320px;
+    height: 337px;
+    overflow: hidden;
+    border-radius: 8px
+}
+
+.resume.card-preview{
+    transform: scale(0.404);
+    transform-origin: top left
 }
 
 .form-section::-webkit-scrollbar, .resume-section::-webkit-scrollbar{
     display: none;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-
-.header h1 {
-    margin: 0;
-    font-size: 32px;
-    font-weight: 700;
-}
-
-.header h2 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.container{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.container-row{
-    display: flex;
-    gap: 15px;
-    margin: 1px
-}
-
-.section-title {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    border-bottom: 2px solid #333;
-    margin: 8px 0px;
-}
-
-.section-title-2 {
-    text-align: center;
-    border-top: 2px solid #333
-}
-
-.section-title-3 {
-    text-align: center;
-    background-color: rgb(159, 158, 158);
-}
-
-.experience{
-    margin: 5px 0;
 }
 
 @media print {
