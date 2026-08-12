@@ -4,6 +4,7 @@ import { connectDB } from './config/mongoose.config.js';
 import cors from 'cors'
 import authRoutes from './routes/auth.routes.js'
 import resumeRoutes from './routes/resume.routes.js'
+import aiRoutes from './routes/ai.routes.js'
 import cookieParser from "cookie-parser"
 import { authMiddleware } from './middleware/auth.middleware.js';
 
@@ -22,6 +23,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use("/auth", authRoutes)
 app.use("/resumes", authMiddleware, resumeRoutes)
+app.use("/ai", aiRoutes)
 
 app.get("/health", (req, res) => {
     res.json({msg: "Hello from server"})

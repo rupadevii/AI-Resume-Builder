@@ -1,31 +1,8 @@
-/* eslint-disable no-undef */
-import express from "express";
 import axios from "axios";
-import dotenv from "dotenv"
-import cors from "cors"
-
-const app = express()
-
-dotenv.config({
-    quiet: true
-})
-
-// app.use(cors({
-//     origin: "http://localhost:5173",
-//     credentials: true,
-// }))
-
-app.use(cors())
-
-app.use(express.json())
-
-const router = express.Router();
-
-app.use("/api", router)
 
 const MODEL_NAME = "gemini-2.5-flash-lite";
 
-router.post("/refine-resume", async (req, res) => {
+export const refineResume = async (req, res) => {
     try {
         const { resumeData } = req.body;
 
@@ -58,7 +35,6 @@ router.post("/refine-resume", async (req, res) => {
         };
 
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${process.env.GEMINI_API_KEY}`;
-        console.log("apiUrl", apiUrl);
 
         const response = await axios.post(apiUrl, payload, {
             headers: { "Content-Type": "application/json" },
@@ -84,13 +60,6 @@ router.post("/refine-resume", async (req, res) => {
         console.error("AI Refine Error:", err.response?.data || err.message);
         res.status(500).json({ error: "Failed to refine resume" });
     }
-});
-
-app.listen(process.env.PORT, () => {
-    console.log("Server is running on PORT", process.env.PORT)
-})
-
-export default app
-
+}
 
 

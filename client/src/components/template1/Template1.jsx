@@ -7,7 +7,7 @@ import Heading from './Heading'
 
 export default function Template1({data}) {
     return (
-        <div className="">
+        <div className="template">
             <PersonalInfo data={data}/>
 
             {data.personalInfo?.summary && (

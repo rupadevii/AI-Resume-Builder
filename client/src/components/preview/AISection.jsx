@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useInfo } from '../../context/InfoContext'
 import Template1 from '../template1/Template1'
 import Template2 from '../template2/Template2'
 import Template3 from '../template3/Template3'
 import { calculateCount, calculateTotalCount } from '../../utils/stats'
-import { Sparkle, Sparkles } from 'lucide-react'
-const URL = import.meta.env.VITE_BASE_URL
+import { Sparkles } from 'lucide-react'
+import api from '../../services/api';
 
 export default function AISection({template, setShow, show, aiResponse, setAiResponse, setOriginalInfo}) {
     const [loading, setLoading] = useState(false)
@@ -31,7 +30,7 @@ export default function AISection({template, setShow, show, aiResponse, setAiRes
             }
 
             setOriginalInfo(structuredClone(info))
-            const res = await axios.post(`/api/refine-resume`, {resumeData:info})
+            const res = await api.post(`/ai/refine-resume`, {resumeData:info})
             setAiResponse(res.data.data)
             localStorage.setItem("ai_response", JSON.stringify(res.data.data))
             setShow(true)

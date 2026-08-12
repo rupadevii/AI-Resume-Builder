@@ -13,6 +13,8 @@ export default function Navbar() {
 
     if(location.pathname==="/" || location.pathname==="/home" || location.pathname==="/signup" || location.pathname==="/login") return null;
 
+    const isResumePage = location.pathname==="/resumes"
+
     function handleClick(){
         setInfo(dummyData)
     }
@@ -30,14 +32,20 @@ export default function Navbar() {
         <nav className='bg-zinc-950 z-100 text-white h-19 fixed w-full flex items-center pl-30 pr-10 justify-between'>
             <Link to="/home"><div className="text-lg">AI RESUME BUILDER</div></Link>
             <div className="flex gap-5 items-center">
-                <button onClick={handleClick} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Fill Mock</button>
-                <button onClick={clearMockData} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Clear</button>
+                {!isResumePage && (
+                    <>
+                        <button onClick={handleClick} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Fill Mock</button>
+                        <button onClick={clearMockData} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Clear</button>
+                    </>
+                )}
                 {
                     isAuthenticated ? (
                         <ul className="list-style-none flex items-center gap-4">
-                            <li className='rounded-sm px-3 py-1 gap-2 hover:bg-red-700 flex items-center hover:cursor-pointer border-white border'>
-                                <Link to="/resumes"><span className='mb-0'>My Resumes</span></Link>
-                            </li>
+                            {!isResumePage && (
+                                <li className='rounded-sm px-3 py-1 gap-2 hover:bg-red-700 flex items-center hover:cursor-pointer border-white border'>
+                                    <Link to="/resumes"><span className='mb-0'>My Resumes</span></Link>
+                                </li>
+                            )}
                             <li className='hover:underline underline-offset-2 hover:cursor-pointer' onClick={logoutUser}>Logout</li>
                         </ul>
                     ) : (

@@ -23,6 +23,10 @@ input, textarea{
     box-shadow: 3px 3px rgb(208, 207, 207) ;
 }
 
+/* .template{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+} */
+
 .section-title-2 {
     text-align: center;
     border-top: 2px solid #333;
