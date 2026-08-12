@@ -3,11 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api'
 import { FileText, Plus } from 'lucide-react';
 import ResumeCard from '../components/resumes/ResumeCard';
+import { deleteModalStyles } from '../utils/styles';
+import Modal from 'react-modal'
 
 export default function ResumesPage() {
     const [resumes, setResumes] = useState([])
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [currResume, setCurrResume] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     async function getResumes(){
         try {
@@ -26,13 +31,16 @@ export default function ResumesPage() {
         getResumes()
     }, []) 
 
-    async function handleDelete(id){
+    async function handleDelete(){
         try{
-            console.log("clicked")
-            await api.delete(`/resumes/${id}`)
-            setResumes(prev => prev.filter(item => item._id !== id))
+            setDeleting(true)
+            await api.delete(`/resumes/${currResume}`)
+            setResumes(prev => prev.filter(item => item._id !== currResume))
         } catch (error) {
             console.log(error)
+        } finally {
+            setDeleting(false)
+            setModalIsOpen(false)
         }
     }
 
@@ -51,7 +59,7 @@ export default function ResumesPage() {
                     <h1 className='text-4xl'>Saved Resumes</h1>
                 </div>
                 <button
-                    onClick={() => navigate('/build')}
+                    onClick={() => navigate('/build?template=template1')}
                     className="bg-black text-white px-4 py-2 rounded-md hover:bg-stone-700 flex items-center gap-2"
                 >
                     <Plus size={18} /> New Resume
@@ -66,7 +74,7 @@ export default function ResumesPage() {
                             <p className="text-gray-500 text-sm mt-1">Start one and it'll show up here.</p>
                         </div>
                         <button
-                            onClick={() => navigate('/build')}
+                            onClick={() => navigate('/build?template=template1')}
                             className="bg-black text-white px-4 py-2 rounded-md hover:bg-stone-700 mt-2"
                         >                           Create your first resume
                         </button>
@@ -74,10 +82,35 @@ export default function ResumesPage() {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
                         {resumes.map(resume => (
-                            <ResumeCard key={resume._id} resume={resume} handleDelete={handleDelete} />
+                            <ResumeCard key={resume._id} resume={resume} setCurrResume={setCurrResume} setModalIsOpen={setModalIsOpen}/>
                         ))}
                     </div>
                 )}
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={() => setModalIsOpen(false)}
+                    style={deleteModalStyles}
+                >
+                    <p className="text-gray-700 mb-6 text-lg">Are you sure you want to delete this resume?</p>
+                    <div className="flex justify-end gap-3">
+                        <button
+                            className="px-4 py-2 rounded-md bg-red-800 text-white text-sm font-medium hover:bg-red-700 transition-colors"
+                            onClick={() => {
+                                handleDelete()
+                            }}
+                            disabled={deleting}
+                        >
+                            {deleting ? "Deleting" : "Delete"}
+                        </button>
+                        <button
+                            className="px-4 py-2 rounded-md bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors"
+                            onClick={() => setModalIsOpen(false)}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </Modal>
             </div>
         </div>
     )

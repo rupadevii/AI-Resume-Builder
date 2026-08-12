@@ -13,9 +13,9 @@ import api from '../services/api';
 
 export default function BuilderPage() {
     const [score, setScore] = useState(0)
-    const {info, setInfo} = useInfo()
+    const {info, setInfo, initialState} = useInfo()
     const [searchParams] = useSearchParams()
-    const template = searchParams.get('template')
+    const [template, setTemplate] = useState(searchParams.get('template')||null)
     const [resumeId, setResumeId] = useState(searchParams.get('id') || null)
 
     useEffect(() => {
@@ -31,12 +31,14 @@ export default function BuilderPage() {
     useEffect(() => {
         async function fetchInfo(){
             const res = await api.get(`/resumes/${resumeId}`)
-            console.log("res",res)
             setInfo(res.data.resume.data)
+            setTemplate(res.data.resume.template)
         }
 
         if(resumeId){
             fetchInfo()
+        }else{
+            setInfo(initialState)
         }
     }, [resumeId])
 
@@ -53,7 +55,7 @@ export default function BuilderPage() {
                 <Skills/>
             </section>
             <section className='resume-section max-h-screen overflow-y-auto pb-10'>
-                <Preview template={template} resumeId={resumeId} setResumeId={setResumeId}/>
+                <Preview template={template} setTemplate={setTemplate} resumeId={resumeId} setResumeId={setResumeId}/>
             </section>
         </main>
     )

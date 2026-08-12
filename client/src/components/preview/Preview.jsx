@@ -7,13 +7,17 @@ import AISection from './AISection'
 import Template3 from '../template3/Template3'
 import Template2 from '../template2/Template2'
 import Modal from 'react-modal'
-import { customStyles } from '../../utils/styles'
+import { customStyles, templateModalStyles } from '../../utils/styles'
 import { useSelector } from 'react-redux';
 import api from '../../services/api';
+import template1 from '../../assets/template1.png'
+import template2 from '../../assets/template2.png'
+import template3 from '../../assets/template3.png'
 
-export default function Preview({template, resumeId, setResumeId}) {
+export default function Preview({template, setTemplate, resumeId, setResumeId}) {
     const {info, setInfo} = useInfo()
     const [isShowing, setIsShowing] = useState(false)
+    const [showTemplateModal, setShowTemplateModal] = useState(false)
     const [aiResponse, setAiResponse] = useState({})
     const [show, setShow] = useState(false)
     const ref = useRef()
@@ -33,6 +37,15 @@ export default function Preview({template, resumeId, setResumeId}) {
 
     function closeModal() {
         setIsOpen(false);
+    }
+
+    function closeTemplateModal(){
+        setShowTemplateModal(false)
+    }
+
+    function changeTemplate(item){
+        setTemplate(item)
+        closeTemplateModal()
     }
 
     async function saveResume(){
@@ -73,6 +86,11 @@ export default function Preview({template, resumeId, setResumeId}) {
                         >Use this</button>
                         </>
                     )}
+                    <button 
+                        className="hover:underline underline-offset-2" 
+                        onClick={() => setShowTemplateModal(true)}>
+                            Change Template
+                    </button>
                     <button 
                         disabled={!isAuthenticated} 
                         className='border px-3 py-1 rounded-md disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed save-btn hover:bg-gray-200'
@@ -118,6 +136,21 @@ export default function Preview({template, resumeId, setResumeId}) {
                     style={customStyles}
                 >
                     <PreviewPage aiResponse={aiResponse} template={template} originalInfo={originalInfo}/>
+                </Modal>
+
+                <Modal
+                    isOpen={showTemplateModal}
+                    onRequestClose={closeTemplateModal}
+                    style={templateModalStyles}
+                >
+                    <div>
+                        <h2 className='font-bold text-2xl text-center'>Choose Template</h2>
+                        <div className='flex gap-6 my-4'>
+                            <button className='flex my-2 p-5 capitalize shadow-lg cursor-pointer gap-3 items-center hover:bg-stone-400 text-xl' onClick={() => changeTemplate("template1")}><img src={template1} height="300" width="300"/></button>
+                            <button className='flex my-2 p-5 capitalize shadow-lg cursor-pointer gap-3 items-center hover:bg-stone-400 text-xl' onClick={() => changeTemplate("template2")}><img src={template2} height="300" width="300"/></button>
+                            <button className='flex my-2 p-5 capitalize shadow-lg cursor-pointer gap-3 items-center hover:bg-stone-400 text-xl' onClick={() => changeTemplate("template3")}><img src={template3} height="300" width="300"/></button>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         </div>

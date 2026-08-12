@@ -4,8 +4,13 @@ import Template1 from "../template1/Template1";
 import Template2 from "../template2/Template2";
 import Template3 from "../template3/Template3";
 
-function ResumeCard({resume, handleDelete}){
+function ResumeCard({resume, setCurrResume, setModalIsOpen}){
     const navigate = useNavigate()
+
+    function handleClick(){
+        setCurrResume(resume._id)
+        setModalIsOpen(true)
+    }
 
     return (
         <div onClick={() => navigate(`/build?id=${resume._id}&template=${resume.template}`)} className="group relative bg-white border-2 border-black rounded-md cursor-pointer hover:-translate-y-0.5 ztransition-all duration-150">
@@ -36,7 +41,7 @@ function ResumeCard({resume, handleDelete}){
                     <button
                         onClick={(e) => {
                             e.stopPropagation()
-                            handleDelete(resume._id)
+                            handleClick()
                         }}
                         className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded hover:bg-red-50 text-gray-400 hover:text-red-700"
                     >

@@ -23,6 +23,21 @@ input, textarea{
     box-shadow: 3px 3px rgb(208, 207, 207) ;
 }
 
+.section-title-2 {
+    text-align: center;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    margin: 10px 0px;
+    font-weight: bold
+}
+
+.section-title-3 {
+    text-align: center;
+    background-color: rgb(159, 158, 158);
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
 .resume {
     width: 210mm;
     min-height: 297mm;

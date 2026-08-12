@@ -1,54 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { initialState } from "../data/initialState";
 
 const InfoContext = createContext()
 
 export const InfoProvider = ({children}) => {
-    const initialState = { 
-        resumeType: "Experienced",
-        personalInfo: {
-            name: "",
-            summary: "",
-            githubURL: "",
-            linkedInURL: "",
-            email: "",
-            phone: "",
-            location: ""
-        },
-        education: [
-            {
-                school: "",
-                degree: "",
-                startDate: "",
-                endDate: "",
-                cgpa: "",
-            }
-        ],
-        workExperience: [
-            {
-                companyName: "",
-                startDate: "",
-                endDate: "",
-                designation: "",
-                desc: "",
-                isCurrentCompany: false
-            }
-        ],
-        projects: [
-            {
-                title: "",
-                desc: "",
-                technologies: [],
-                liveURL: "",
-                githubURL: ""
-            }
-        ],
-        skills: {
-            technical: [],
-            soft: [],
-            tools: []
-        }
-    }
-
+    
     const [info, setInfo] = useState(() => {
         return JSON.parse(localStorage.getItem("info")) || initialState
     })
@@ -70,7 +26,7 @@ export const InfoProvider = ({children}) => {
     }
 
     return (
-        <InfoContext.Provider value={{info, setInfo, clearMockData}}>
+        <InfoContext.Provider value={{info, setInfo, clearMockData, initialState}}>
             {children}
         </InfoContext.Provider>
     )
