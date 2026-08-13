@@ -53,7 +53,10 @@ export default function ResumesPage() {
     }
 
     return (
-        <div className='pt-24 px-14 max-w-6xl mx-auto'>
+        <div className='py-24 px-14 max-w-6xl mx-auto'>
+            <div onClick={() => navigate(-1)} className="text-sm px-3 py-2 hover:underline underline-offset-2 cursor-pointer">
+                ← Back
+            </div>
             <div className="flex items-end justify-between mb-10 border-b border-black pb-6 pt-4">
                 <div>
                     <h1 className='text-4xl'>Saved Resumes</h1>

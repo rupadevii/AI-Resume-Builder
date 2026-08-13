@@ -67,44 +67,66 @@ export default function Preview({template, setTemplate, resumeId, setResumeId}) 
     
     return (
         <div>
-            <div className='mb-3 flex justify-between'>
-                <div className='flex gap-1'>
-                    <div onClick={() => setIsShowing(false)} className={`${!isShowing && "bg-black text-white"} px-4 py-1 rounded-md cursor-pointer hover:bg-black hover:text-white`}>Preview</div>
-                    <div onClick={() => setIsShowing(true)} className={`${isShowing && "bg-black text-white"} px-3 py-1 rounded-md cursor-pointer hover:bg-black hover:text-white`}>AI</div>
+            <div className='mb-3 flex justify-between items-center'>
+                <div className='flex gap-1 bg-gray-100 p-1 rounded-md'>
+                    <div
+                        onClick={() => setIsShowing(false)}
+                        className={`px-4 py-1 rounded-md cursor-pointer text-sm font-medium transition-colors ${
+                            !isShowing ? "bg-black text-white" : "text-gray-600 hover:bg-gray-200"
+                        }`}
+                    >
+                        Preview
+                    </div>
+                    <div
+                        onClick={() => setIsShowing(true)}
+                        className={`px-4 py-1 rounded-md cursor-pointer text-sm font-medium transition-colors ${
+                            isShowing ? "bg-black text-white" : "text-gray-600 hover:bg-gray-200"
+                        }`}
+                    >
+                        AI
+                    </div>
                 </div>
-                <div className='flex gap-5 items-center'>
+
+                <div className='flex gap-5 items-center text-sm'>
                     {show && (
                         <>
-                        <button 
-                            className="hover:underline underline-offset-2" 
-                            onClick={openModal}>
+                            <button
+                                className="text-gray-600 hover:text-black hover:underline underline-offset-2 transition-colors"
+                                onClick={openModal}
+                            >
                                 Compare
-                        </button>
-                        <button
-                            className=""
-                            onClick={() => setInfo(aiResponse)}
-                        >Use this</button>
+                            </button>
+                            <button
+                                className="flex items-center gap-1 px-3 py-1 rounded-md bg-black text-white font-medium hover:bg-gray-800 transition-colors"
+                                onClick={() => setInfo(aiResponse)}
+                            >
+                                Use this
+                            </button>
+                            <span className="h-4 w-px bg-gray-300" />
                         </>
                     )}
-                    <button 
-                        className="hover:underline underline-offset-2" 
-                        onClick={() => setShowTemplateModal(true)}>
-                            Change Template
+                    <button
+                        className="text-gray-600 hover:text-black hover:underline underline-offset-2 transition-colors"
+                        onClick={() => setShowTemplateModal(true)}
+                    >
+                        Change Template
                     </button>
-                    <button 
-                        disabled={!isAuthenticated} 
-                        className='border px-3 py-1 rounded-md disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed save-btn hover:bg-gray-200'
+                    <button
+                        disabled={!isAuthenticated}
+                        className='border px-3 py-1 rounded-md font-medium disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed save-btn hover:bg-gray-200 transition-colors'
                         onClick={saveResume}
                     >
                         {saving ? "Saving..." : "Save"}
                     </button>
-                    <button 
-                        onClick={handlePrint} 
-                        className='border-2 border-black px-3 py-1 text-white rounded-md mr-5 hover:bg-red-700 bg-red-800'>
-                            Export PDF
+                    <button
+                        onClick={handlePrint}
+                        className='px-3 py-1 rounded-md font-medium text-white bg-red-700 hover:bg-red-800 transition-colors'
+                    >
+                        Export PDF
                     </button>
                 </div>
             </div>
+            
             <div ref={ref}>
                 <Activity mode={!isShowing ? "visible" : "hidden"}>
                     <div className='a4-print-container resume'>

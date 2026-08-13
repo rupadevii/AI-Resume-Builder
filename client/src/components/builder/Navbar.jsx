@@ -34,17 +34,30 @@ export default function Navbar() {
             <div className="flex gap-5 items-center">
                 {!isResumePage && (
                     <>
-                        <button onClick={handleClick} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Fill Mock</button>
-                        <button onClick={clearMockData} className="border border-white px-3 py-1 rounded-md hover:bg-stone-700">Clear</button>
+                        <button
+                            onClick={handleClick}
+                            className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs font-medium text-zinc-300 transition-all duration-200 hover:border-violet-400/40 hover:bg-violet-500/10 hover:text-white"
+                        >
+                            Fill Mock
+                        </button>
+                        <button
+                            onClick={clearMockData}
+                            className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs font-medium text-zinc-300 transition-all duration-200 hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-300"
+                        >
+                            Clear
+                        </button>
                     </>
                 )}
                 {
                     isAuthenticated ? (
                         <ul className="list-style-none flex items-center gap-4">
                             {!isResumePage && (
-                                <li className='rounded-sm px-3 py-1 gap-2 hover:bg-red-700 flex items-center hover:cursor-pointer border-white border'>
-                                    <Link to="/resumes"><span className='mb-0'>My Resumes</span></Link>
-                                </li>
+                                <Link
+                                    to="/resumes"
+                                    className="rounded-lg border border-violet-400/30 bg-violet-500/10 px-3 py-2 text-sm font-medium text-violet-300 transition-all duration-200 hover:border-violet-400/60 hover:bg-violet-500/20 hover:text-violet-200"
+                                    >
+                                    My Resumes
+                                </Link>
                             )}
                             <li className='hover:underline underline-offset-2 hover:cursor-pointer' onClick={logoutUser}>Logout</li>
                         </ul>
@@ -62,3 +75,4 @@ export default function Navbar() {
         </nav>
     )
 }
+

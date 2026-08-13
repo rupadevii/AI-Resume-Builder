@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { fetchUser } from './redux/features/authSlice';
 import { useDispatch } from 'react-redux';
 import ResumesPage from './pages/ResumesPage';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 Modal.setAppElement('#root');
 
@@ -29,7 +30,7 @@ export default function App() {
                 <Route path="/build" element={<BuilderPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/signup" element={<SignupPage/>}/>
-                <Route path="/resumes" element={<ResumesPage/>}/>
+                <Route path="/resumes" element={<ProtectedRoute><ResumesPage/></ProtectedRoute>}/>
             </Routes>
         </>
     )
